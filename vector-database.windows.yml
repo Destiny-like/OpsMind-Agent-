@@ -1,0 +1,18 @@
+# 本机适配层（Windows / 国内网络）
+#
+# 原因：本机直连 registry-1.docker.io 不通，各镜像站对 minio/minio 仓库返回 403/denied，
+#       因此 minio 改用 bitnami/minio 镜像（同一个 MinIO 服务端，只是环境变量名与数据目录不同）。
+# 用法：docker compose -f vector-database.yml -f vector-database.windows.yml up -d
+#       （scripts/oncall_ctl.py 会自动带上本文件）
+
+services:
+  minio:
+    image: bitnami/minio:latest
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/bitnami/minio/data
+    # bitnami 镜像里没有 curl，原 healthcheck 无意义，直接关闭（Milvus 只等容器启动，不等健康）
+    healthcheck:
+      disable: true
