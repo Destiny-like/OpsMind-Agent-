@@ -3,7 +3,7 @@
 # 原因：本机直连 registry-1.docker.io 不通，各镜像站对 minio/minio 仓库返回 403/denied，
 #       因此 minio 改用 bitnami/minio 镜像（同一个 MinIO 服务端，只是环境变量名与数据目录不同）。
 # 用法：docker compose -f vector-database.yml -f vector-database.windows.yml up -d
-#       （scripts/oncall_ctl.py 会自动带上本文件）
+#       （scripts/opsmind_ctl.py 会自动带上本文件）
 
 services:
   minio:

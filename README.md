@@ -1,4 +1,4 @@
-# OpsMind · 智能 OnCall Agent 系统
+# OpsMind（运维智脑）
 
 > 一句话：把「人找知识、人问人、人排障」收敛成一条 AI Agent 流水线。
 
@@ -9,7 +9,7 @@
 
 ## 项目介绍
 
-OpsMind 是一套面向研发与运维团队的**智能 OnCall Agent 系统**，通过 AI Agent 解决团队值班中的真实痛点：整合**知识库、对话、运维**三大核心能力，实现**问题自动应答**与**故障智能排查**的一体化服务，致力于降低团队 OnCall 的人力成本、提升团队整体效率。
+OpsMind 是一套面向研发与运维团队的**智能运维 Agent 系统**，通过 AI Agent 解决团队值班中的真实痛点：整合**知识库、对话、运维**三大核心能力，实现**问题自动应答**与**故障智能排查**的一体化服务，致力于降低团队值班的人力成本、提升团队整体效率。
 
 系统的设计中心是 Agent，而不是一个"会聊天的检索框"：知识侧用 RAG 把散落的历史文档、复盘记录和值班手册变成可检索、可引用的答案；对话侧用多轮上下文承接日常重复提问，直接给出可执行的处理步骤；运维侧用 Plan-Execute-Replan 的 Agent 循环，把"服务为什么突然变慢"这类模糊问题自动拆成诊断计划，调用日志与监控工具逐步取证、动态修正判断，最后产出根因分析与处置建议。三块能力共用同一套工具与上下文，因此一次会话里可以从"知识问答"自然衔接到"动手排查"。
 
@@ -116,7 +116,7 @@ stop.bat      :: 停止 API 与 MCP（stop.bat milvus 连 Milvus 容器一起停
 ```
 
 `start.bat` 幂等：已运行的服务不会重复拉起，已建好的索引不会重复构建；需要重建索引时执行 `start.bat docs`。
-更细的参数可查看 `scripts/oncall_ctl.py` 的子命令：`start` / `stop` / `status` / `logs` / `upload-docs` / `pull-images`。
+更细的参数可查看 `scripts/opsmind_ctl.py` 的子命令：`start` / `stop` / `status` / `logs` / `upload-docs` / `pull-images`。
 
 ### 访问服务
 
@@ -171,7 +171,7 @@ OpsMind/
 ├── static/                     Web 前端（index.html / app.js / styles.css）
 ├── mcp_servers/                MCP 服务：cls_server.py(8003)、monitor_server.py(8004)
 ├── aiops-docs/                 运维知识库（Markdown）
-├── scripts/oncall_ctl.py       启停控制：start / stop / status / logs / upload-docs / pull-images
+├── scripts/opsmind_ctl.py       启停控制：start / stop / status / logs / upload-docs / pull-images
 ├── start.bat / stop.bat / setup.bat    Windows 一键启动 / 停止 / 首次安装
 ├── vector-database.yml         Milvus Docker Compose（etcd + MinIO + Milvus + Attu）
 ├── vector-database.windows.yml 可选覆盖层：以 bitnami/minio 替代 minio/minio
@@ -218,7 +218,7 @@ Replanner ──► 评估结果：继续、调整计划，或收口
 确认 Docker Desktop 已运行；`docker ps` 能看到 `milvus-standalone` 且状态 healthy；必要时 `docker logs milvus-standalone` 查因，或 `docker compose -f vector-database.yml restart`。
 
 **镜像拉取超时（registry-1.docker.io 不可达）**
-在受限网络下可先通过镜像站拉取再重命名，或用 `python scripts/oncall_ctl.py pull-images` 按内置的镜像站列表顺序重试；MinIO 仓库被镜像站屏蔽时，使用覆盖层启动：
+在受限网络下可先通过镜像站拉取再重命名，或用 `python scripts/opsmind_ctl.py pull-images` 按内置的镜像站列表顺序重试；MinIO 仓库被镜像站屏蔽时，使用覆盖层启动：
 ```bash
 docker compose -f vector-database.yml -f vector-database.windows.yml up -d
 ```
@@ -233,7 +233,7 @@ lsof -i :9900                    # macOS / Linux
 ```
 
 **重建知识库**
-重新上传即可（同一来源的旧分片会自动覆盖）：`start.bat docs` 或 `python scripts/oncall_ctl.py upload-docs`；彻底清空用 `docker compose -f vector-database.yml down -v`。
+重新上传即可（同一来源的旧分片会自动覆盖）：`start.bat docs` 或 `python scripts/opsmind_ctl.py upload-docs`；彻底清空用 `docker compose -f vector-database.yml down -v`。
 
 ## 📚 参考
 

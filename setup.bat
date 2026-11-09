@@ -57,7 +57,7 @@ echo.
 echo ============================================
 echo   Step 4/4  pull milvus images
 echo ============================================
-.venv\Scripts\python.exe scripts\oncall_ctl.py pull-images
+.venv\Scripts\python.exe scripts\opsmind_ctl.py pull-images
 if errorlevel 1 echo   [WARN] some images failed, retry later
 
 echo.

@@ -5,7 +5,7 @@ cd /d "%~dp0"
 title OpsMind
 
 set "PY=%~dp0.venv\Scripts\python.exe"
-set "CTL=%~dp0scripts\oncall_ctl.py"
+set "CTL=%~dp0scripts\opsmind_ctl.py"
 set "EXTRA=%*"
 if /i "%~1"=="docs" (
     set "EXTRA=--force-docs"

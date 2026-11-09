@@ -45,7 +45,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=config.app_name,
     version=config.app_version,
-    description="基于 LangChain 的智能oncall运维系统",
+    description="OpsMind 运维智脑 · RAG 知识库问答 + AIOps 智能运维诊断",
     lifespan=lifespan
 )
 

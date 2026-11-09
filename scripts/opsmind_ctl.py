@@ -1,11 +1,11 @@
 r"""OpsMind 本地启停控制脚本（Windows）
 
 用法（在项目根目录）：
-    .venv\Scripts\python.exe scripts\oncall_ctl.py start    # 一键启动全部依赖与服务
-    .venv\Scripts\python.exe scripts\oncall_ctl.py stop     # 停止 API / MCP / Milvus 容器
-    .venv\Scripts\python.exe scripts\oncall_ctl.py status    # 查看端口、容器与健康状态
-    .venv\Scripts\python.exe scripts\oncall_ctl.py logs      # 查看各服务最近日志
-    .venv\Scripts\python.exe scripts\oncall_ctl.py upload-docs [--force]
+    .venv\Scripts\python.exe scripts\opsmind_ctl.py start    # 一键启动全部依赖与服务
+    .venv\Scripts\python.exe scripts\opsmind_ctl.py stop     # 停止 API / MCP / Milvus 容器
+    .venv\Scripts\python.exe scripts\opsmind_ctl.py status    # 查看端口、容器与健康状态
+    .venv\Scripts\python.exe scripts\opsmind_ctl.py logs      # 查看各服务最近日志
+    .venv\Scripts\python.exe scripts\opsmind_ctl.py upload-docs [--force]
 """
 
 from __future__ import annotations

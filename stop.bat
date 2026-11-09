@@ -5,7 +5,7 @@ cd /d "%~dp0"
 title OpsMind - stop
 
 set "PY=%~dp0.venv\Scripts\python.exe"
-set "CTL=%~dp0scripts\oncall_ctl.py"
+set "CTL=%~dp0scripts\opsmind_ctl.py"
 if not exist "%PY%" set "PY=py"
 
 set "EXTRA=%*"
